@@ -4,7 +4,7 @@
 		<view class="swiper-image">
 			<swiper class="swiper-image" :indicator-dots="indicatorDots" :indicator-active-color="indicatorActiveColor"
 			:indicator-color="indicatorColor" :autoplay="autoPlay" :interval="interval">
-				<swiper-item v-for="image in images" >
+				<swiper-item v-for=" (image,index) in images" :key="index" >
 					<image :src="image" style="width: 100%;height: 100%;"></image>
 				</swiper-item>
 			</swiper>
@@ -25,13 +25,13 @@
 		</view>
 		<view class="classification">
 			<view class="classification-one">
-				<view class="classification-child" v-for="images in buttonImagesOne">
+				<view class="classification-child" v-for=" (images,index) in buttonImagesOne" :key="index">
 					<image :src="images.img" class="classification-image"></image>
 					<text class="classification-text">{{images.title}}</text>
 				</view>
 			</view>
 			<view class="classification-one">
-				<view class="classification-child" v-for="images in buttonImageTwo">
+				<view class="classification-child" v-for="(images,index) in buttonImageTwo" :key="index">
 					<image :src="images.img" class="classification-image"></image>
 					<text class="classification-text">{{images.title}}</text>
 				</view>
@@ -63,7 +63,7 @@
 				</view>
 			</view>
 			<view class="commodity">
-				<view v-for="i in buttonImagesOne" class="commodity-child">
+				<view v-for=" (i,index) in buttonImagesOne" class="commodity-child" :key="index">
 					<image class="commodity-img" :src="i.img"></image>
 					<text class="commodity-text">江中猴菇米稀养胃早餐450g不好吃手动阀</text>
 					<view class="commodity-label">
@@ -100,7 +100,7 @@
 				</view>
 			</view>
 			<view class="commodity">
-				<view v-for="i in buttonImagesOne" class="commodity-child">
+				<view v-for="(i,index) in buttonImagesOne" class="commodity-child" :key="index">
 					<image class="commodity-img" :src="i.img"></image>
 					<text class="commodity-text">江中猴菇米稀养胃早餐450g不好吃手动阀</text>
 					<view class="commodity-label">
@@ -138,7 +138,7 @@
 				</view>
 			</view>
 			<view class="commodity">
-				<view v-for="i in buttonImagesOne" class="commodity-child">
+				<view v-for="(i,index) in buttonImagesOne" class="commodity-child" :key="index">
 					<image class="commodity-img" :src="i.img"></image>
 					<text class="commodity-text">江中猴菇米稀养胃早餐450g不好吃手动阀</text>
 					<view class="commodity-label">
