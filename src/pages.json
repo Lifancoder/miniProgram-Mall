@@ -1,9 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/classification/classification",
+			"path": "pages/socialCircle/sociaCircle",
 			"style": {
-				"navigationBarTitleText": "分类"
+				"navigationBarTitleText": "社交圈"
 			}
 		},{
 			"path": "pages/index/index",
@@ -11,9 +11,9 @@
 				"navigationBarTitleText": "厨+心选"
 			}
 		},{
-			"path": "pages/socialCircle/sociaCircle",
+			"path": "pages/classification/classification",
 			"style": {
-				"navigationBarTitleText": "社交圈"
+				"navigationBarTitleText": "分类"
 			}
 		},{
 			"path":"pages/shoppingCar/shoppingCar",
