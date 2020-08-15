@@ -1,11 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/socialCircle/sociaCircle",
-			"style": {
-				"navigationBarTitleText": "社交圈"
-			}
-		},{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "厨+心选"
@@ -14,6 +9,11 @@
 			"path": "pages/classification/classification",
 			"style": {
 				"navigationBarTitleText": "分类"
+			}
+		},{
+			"path": "pages/socialCircle/sociaCircle",
+			"style": {
+				"navigationBarTitleText": "社交圈"
 			}
 		},{
 			"path":"pages/shoppingCar/shoppingCar",
@@ -25,6 +25,16 @@
 			"style":{
 				"navigationBarTitleText":"我的"
 			}
+		},{
+			"path":"pages/socialCircle/siciaCircleDetails",
+			"style":{
+			"navigationBarTitleText":"社交圈详情"	
+			}
+		},{
+			"path":"pages/mine/loginedMine",
+			"style":{
+			"navigationBarTitleText":"我的"	
+		}
 		}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -60,7 +70,7 @@
 				"selectedIconPath":"static/images/tab-cart-current.png",
 				"text":"购物车"
 			},{
-				"pagePath":"pages/mine/mine",
+				"pagePath":"pages/mine/loginedMine",
 				"iconPath":"static/images/tab-my.png",
 				"selectedIconPath":"static/images/tab-my-current.png",
 				"text":"我的"

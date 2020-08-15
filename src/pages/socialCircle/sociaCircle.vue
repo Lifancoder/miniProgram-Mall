@@ -27,7 +27,7 @@
 							<image class="footer-share" src="../../static/images/islike.png"></image>
 							<text class="operation-text">{{content.likenum}}</text>
 						</view>
-						<view class="operation-child">
+						<view class="operation-child" @click="toDetails">
 							<image class="footer-share" src="../../static/images/comment.png"></image>
 							<text class="operation-text">{{content.comments}}</text>
 						</view>
@@ -82,22 +82,24 @@
 			}
 		},
 		methods:{
-			// 弹出遮罩层
+			// 分享、点赞、评论操作
 			showDilog(){
 				this.isShare=true
 			},
 			showAlert(){
 				this.isAlert=true
 			},
-			// 关闭遮罩层
 			closeDiog(){
 				this.isShare=false
 			},
 			closeAlert(){
 				this.isAlert=false
+			},
+			toDetails(){
+				uni.navigateTo({
+					url:'/pages/socialCircle/siciaCircleDetails',
+				})
 			}
-			// showUnipop(){
-			// }
 		},
 		mounted() {
 			
@@ -240,7 +242,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	opacity: 0.8;
+	opacity: .9;
 	border-radius: 30px;
 	background-color: #fa436a;
 }

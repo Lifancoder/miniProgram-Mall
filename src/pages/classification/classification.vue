@@ -53,12 +53,10 @@
 </template>
 
 <script>
-	import uniGrid from '@dcloudio/uni-ui/lib/uni-grid/uni-grid.vue'
-	import uniGridItem  from '@dcloudio/uni-ui/lib/uni-grid-item/uni-grid-item.vue'
+	
 	export default{
 		components:{
-			uniGrid,
-			uniGridItem
+			
 		},
 		data(){
 			return{

@@ -270,7 +270,7 @@
 		//实时监听滚动条距TOP距离
 		onPageScroll(res){
 			let val =res.scrollTop/200
-			if(val <= 1){
+			if(val < 1){
 				this.scroll= val
 				this.textColor='#FFFFFF'
 			}else{
@@ -332,6 +332,46 @@
 	justify-content: center;
 	align-items: center;
 }
+.uni-searchbar.data-v-1b21e306 {
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-webkit-flex-direction: row;
+flex-direction: row;
+position: relative;
+padding: 16rpx;
+background-color:rgba(255,255,255,0)!important;
+
+}
+.uni-searchbar__box.data-v-1b21e306 {
+display: -webkit-box;
+display: -webkit-flex;
+display: flex;
+box-sizing: border-box;
+overflow: hidden;
+position: relative;
+-webkit-box-flex: 1;
+-webkit-flex: 1;
+flex: 1;
+-webkit-box-pack: center;
+-webkit-justify-content: center;
+justify-content: center;
+-webkit-box-orient: horizontal;
+-webkit-box-direction: normal;
+-webkit-flex-direction: row;
+flex-direction: row;
+-webkit-box-align: center;
+-webkit-align-items: center;
+align-items: center;
+height: 36px;
+padding: 5px 8px 5px 0;
+border-width: .5px;
+border: none !important;
+
+}
+
 .uni-searchbar.data-v-b0a8ce34 {
 display: -webkit-box;
 display: -webkit-flex;
@@ -366,8 +406,8 @@ align-items: center;
 width: 100%!important;
 height: 50% !important;
 padding: 5px 8px 5px 0px;
-border-style: none;
-
+border: none !important;
+border-style: none !important;
 }
 .input-button{
 	display: flex;
