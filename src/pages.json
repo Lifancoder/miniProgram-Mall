@@ -35,6 +35,21 @@
 			"style":{
 			"navigationBarTitleText":"我的"	
 		}
+		},{
+			"path":"pages/index/fastWay/snapped",
+			"style":{
+			"navigationBarTitleText":"限时秒杀"	
+		}
+		},{
+			"path":"pages/index/childPage",
+			"style":{
+			"navigationBarTitleText":"详情展示"	
+		}
+		},{
+			"path":"pages/index/fastWay/member",
+			"style":{
+			"navigationBarTitleText":"会员专享"	
+		}
 		}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
