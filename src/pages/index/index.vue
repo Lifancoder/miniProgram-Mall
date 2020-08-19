@@ -624,8 +624,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 35px;
-		height: 35px;
+		width: 40px;
+		height: 40px;
 		border-radius: 50%;
 		border: 2px;
 		box-shadow: 0 0 3px #ccc;
@@ -645,8 +645,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 35px;
-		height: 35px;
+		width: 40px;
+		height: 40px;
 		border-radius: 50%;
 		border: 2px;
 		box-shadow: 0 0 3px #ccc;

@@ -32,8 +32,8 @@
 		<view class="details">
 			<text class="commodity-text">{{details.describe}}</text>
 		<view>
-			<text style="color: #fa436a;font-size: 14px;">
-				<text style="color: #fa436a;font-size: 14;">￥</text>{{details.current}}</text>
+			<text class="text-one">
+				<text class="text-one">￥</text>{{details.current}}</text>
 			<text style="font-size: 10px;color: #909399;text-decoration: line-through;">￥{{details.price}}</text>
 		</view>
 		<text style="color: #909399;font-size: 12px;">销量：{{details.sales}}</text>
@@ -49,7 +49,7 @@
 			</view>
 		</view>
 		<view class="details">
-			<view class="select-style">
+			<view class="select-style" @click="openSelect">
 				<text>款式规格</text>
 				<uni-icons type="forward" size="14" color="#909399"></uni-icons>
 			</view>
@@ -81,16 +81,54 @@
 				</view>
 				<view class="semented-child" v-else>评价页</view>
 		</view>
+		
+		<!-- 立即分享 -->
+		
+		<!-- 规格选择 -->
+			<uni-popup type="bottom" ref="popup">
+				<view class="select-dialog" :style="{height:getHeight/2 + 'px'}">
+					<view class="dialog-top">
+						<view class="thumbnails">
+						<image class="thumbnails-img" :src="images[0]"></image>
+					</view>
+					<view class="commodity-title">
+						<text class="text-one">￥{{details.current}}</text>
+						<view class="text-tow">已选：{{details.describe}}</view>
+					</view>
+					</view>
+					
+					<!-- 已预留横向滚动 -->
+					<view class="commodity-style">
+						<text>款式</text>
+						<scroll-view class="style-btn" :scroll-x="true" :show-scrollbar="true">
+							<view class="btn-child"><text class="child-text">舒克流光白活炭早晚牙膏</text></view>
+							
+						</scroll-view>
+					</view>
+					
+					<view class="commodity-style">
+						<text>规格</text>
+						<scroll-view class="style-btn" :scroll-x="true" :show-scrollbar="true">
+							<view class="btn-child"><text class="child-text">65g+65g</text></view>
+							
+						</scroll-view>
+					</view>
+					<view class="success-btn" @click="closeSelect">完成</view>
+				</view>
+			</uni-popup>
+		
 	</view>
 </template>
 
 <script>
 	import uniIcons from '@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue'
 	import uniSegmentedControl from '@dcloudio/uni-ui/lib/uni-segmented-control/uni-segmented-control.vue'
+	import uniPopup  from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 	export default{
 		components:{
 			uniIcons,
-			uniSegmentedControl
+			uniSegmentedControl,
+			uniPopup
 		},
 		data(){
 			return{
@@ -135,12 +173,19 @@
 			}
 		},
 		methods:{
-			//分段器选择
+			//分段器选择（详情/参数/评价）
 			slectControl(e){
 				console.log('打印：'+ JSON.stringify(e) )
 				if(this.selectCurrent!==e.currentIndex){
 					this.selectCurrent=e.currentIndex
 				}
+			},
+			//点击【款式规格】、【加入购物车】、【立即购买】/点击【完成】关闭底下抽屉
+			openSelect(){
+				this.$refs.popup.open()
+			},
+			closeSelect(){
+				this.$refs.popup.close()
 			}
 		},
 		mounted() {
@@ -166,6 +211,10 @@
 		overflow: scroll;
 		/* background-color: #F5F5F5; */
 		z-index: 1;
+	}
+	.text-one{
+		font-size: 14px;
+		color: #FA436A;
 	}
 	.Operation{
 		position: fixed;
@@ -390,5 +439,88 @@
 		height: 20px;
 		font-size: 14px;
 		color: #606266;
+	}
+	.select-dialog{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		border-radius: 5px 5px 0 0;
+		background: #FFFFFF;
+	}
+	.dialog-top{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		height: auto;
+	}
+	.thumbnails{
+		position: relative;
+		top: -20px;
+		left: 20px;
+		display: inline-block;
+		border-radius: 5px 5px 0 0;
+		width: 80px;
+		height: 80px;
+		background: #FFFFFF;
+	}
+	.thumbnails-img{
+		width: 100%;
+		height: 100%;
+		border-radius: 5px 5px 0 0;
+	}
+	.commodity-title{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: flex-start;
+		width: 70%;
+		height: 60px;
+		margin-left: 30px;
+		font-size: 14px;
+		color: #606266;
+	}
+	.text-tow{
+		width: 100%;
+		height: 30px;
+	}
+	.commodity-style{
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		height: 70px;
+		color: #606266;
+	}
+	.style-btn{
+		white-space: nowrap;
+		margin-top: 10px;
+		width: 100%;
+		height: 40px;
+	}
+	.btn-child{
+		display: inline-block;
+		width: fit-content;
+		height: 30px;
+		line-height: 30px;
+		border-radius: 30px;
+		background: #fbebee;
+		margin-right: 10px;
+	}
+	.child-text{
+		font-size: 14px;
+		color: #FA436A;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.success-btn{
+		width: 95%;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		border-radius: 30px;
+		margin-top: 20px;
+		font-size: 14px;
+		color: #FFFFFF;
+		background: #FA436A;
 	}
 </style>
