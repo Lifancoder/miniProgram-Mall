@@ -26,7 +26,7 @@
 				<text class="assets-title">我的资产</text>
 				<view class="assets-more">
 					<text class="more-text">更多</text>
-					<uni-icons type="forward" size="12px" color="#909399"></uni-icons>
+					<uni-icons type="forward" size="14" color="#909399"></uni-icons>
 				</view>
 			</view>
 			<view class="assets-amount">
@@ -55,7 +55,7 @@
 				<text class="assets-title">我的订单</text>
 				<view class="assets-more">
 					<text class="more-text">全部订单</text>
-					<uni-icons type="forward" size="12px" color="#909399"></uni-icons>
+					<uni-icons type="forward" size="14" color="#909399"></uni-icons>
 				</view>
 			</view>
 			<view class="assets-amount">
@@ -309,7 +309,7 @@
 		background-color: #f3f3f3;
 	}
 .assets-title{
-	font-size: 12px;
+	font-size: 14px;
 	margin-left: 10px;
 }
 .assets-more{
@@ -321,7 +321,7 @@
 	height: 20px;
 }
 .more-text{
-	font-size: 12px;
+	font-size: 14px;
 	color: #909399;
 	margin-right: 5px;
 }
@@ -348,13 +348,13 @@
 	font-size: 14px;
 }
 .amount-text{
-	font-size: 10px;
+	font-size: 14px;
 	color: #909399;
 	margin-top: 5px;
 }
 
 .order{
-	font-size: 10px;
+	font-size: 14px;
 	color: #000000;
 	margin-top: 5px;
 }

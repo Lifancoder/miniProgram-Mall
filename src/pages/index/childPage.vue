@@ -43,7 +43,7 @@
 				<image class="share-img" src="../../static/images/shareTab.png"></image>
 				<text class="left-text">分享估赚 ￥{{details.shareAmount}}</text>
 			</view>
-			<view class="share-right">
+			<view class="share-right" @click="openSharePopup">
 				立即分享
 				<text class="iconfont iconfenxiang"></text>
 			</view>
@@ -79,11 +79,58 @@
 					<view class="parameters-child" v-for="(item,index) in details.parameters" :key="index">
 						<text space="emsp">• {{item.name}}：{{item.content}}</text></view>
 				</view>
-				<view class="semented-child" v-else>评价页</view>
+				<view class="semented-parameters" v-else>
+					<view class="comments">
+						<view class="comments-left">
+							<view class="avatar">
+							<image class="avatar-img" :src="images[0]"></image>
+						</view>
+						</view>
+						<view class="comments-right">
+							<view class="right-top">
+								<view class="user-name">努力改变</view>
+								<view class="star">
+									<uni-icons type="star-filled" color="#FFC128" size="16"></uni-icons>
+									<uni-icons type="star-filled" color="#FFC128" size="16"></uni-icons>
+									<uni-icons type="star-filled" color="#FFC128" size="16"></uni-icons>
+									<uni-icons type="star-filled" color="#FFC128" size="16"></uni-icons>
+									<uni-icons type="star-filled" color="#FFC128" size="16"></uni-icons>
+								</view>
+							</view>
+							<view class="right-content">
+								<text>宝贝不错不错不错不错宝贝不错不错不错不错宝贝不错不错不错不错
+								宝贝不错不错不错不错宝贝不错不错不错不错宝贝不错不错不错不错宝贝不错不错不错不错</text>
+							</view>
+							<view class="right-time"><text style="margin-right: 20px;">2020-08-20 14:27:00</text></view>
+						</view>
+					</view>
+				</view>
 		</view>
 		
 		<!-- 立即分享 -->
-		
+		<uni-popup type="bottom" ref="sharePopup">
+			<view class="share-popup">
+				<view class="chare-child">
+					<view class="img-child">
+						<image class="thumbnails-img" src="../../static/images/copy_link.png"></image>
+					</view>
+					<text>复制链接</text>
+				</view>
+				<view class="chare-child">
+					<view class="img-child">
+						<image class="thumbnails-img" src="../../static/images/gen_img.png"></image>
+					</view>
+					<text>生成海报</text>
+				</view>
+				<view class="chare-child">
+					<view class="img-child">
+						<image class="thumbnails-img" src="../../static/images/share_wechat.png"></image>
+					</view>
+					<text>分享好友</text>
+				</view>
+			</view>
+			<view class="chare-cancel" @click="closeSharePopup"><text>取消</text></view>
+		</uni-popup>
 		<!-- 规格选择 -->
 			<uni-popup type="bottom" ref="popup">
 				<view class="select-dialog" :style="{height:getHeight/2 + 'px'}">
@@ -140,8 +187,8 @@
 				indicatorColor: '#9D9D9D',
 				autoPlay: true,
 				interval: 5000,
-				images: ['../../static/testImages/1573899953916162046018(800x800).jpg',
-					'../../static/testImages/shuke.jpg'
+				images: ['http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubzyp8j30m80m8n0h.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uch0vgj30m80m8jvi.jpg'
 				],
 				details:{
 					describe:'舒克流光白活炭早晚牙膏65g+65g',
@@ -150,11 +197,18 @@
 					sales:'909',
 					shareAmount:'0.4',
 					preferential:'1.00',
-					images:['/static/testImages/DeatilImage.jpg',
-					'/static/testImages/1.jpg','/static/testImages/2.jpg','/static/testImages/3.jpg',
-					'/static/testImages/4.jpg','/static/testImages/5.jpg','/static/testImages/6.jpg',
-					'/static/testImages/7.jpg','/static/testImages/8.jpg','/static/testImages/9.jpg',
-					'/static/testImages/10.jpg','/static/testImages/11.jpg'],
+					images:['http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc27tmj30ly0rsakz.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubeifvj30ly0rsdp6.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubrk6lj30ly0rstis.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubgsrhj30ly0rsn69.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubgnvvj30ly0rs47w.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ube8sgj30ly0rsq9b.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubhx4tj30ly0rsn2p.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubobqqj30ly0rs7d2.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubtvjmj30ly0rsn3t.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc61p3j30ly0rsjwm.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubsf16j30ly0rsn5r.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ubrk12j30ly0itq7c.jpg'],
 					parameters:[{name:'产品名称',content:'Saky/舒客 流光白活炭深洁牙膏'},
 					{name:'功能',content:'美白 去牙渍 口气清新 清洁'},
 					{name:'适用对象',content:'成人'},
@@ -180,12 +234,18 @@
 					this.selectCurrent=e.currentIndex
 				}
 			},
-			//点击【款式规格】、【加入购物车】、【立即购买】/点击【完成】关闭底下抽屉
+			//点击【款式规格】、【加入购物车】、【立即购买】或者点击立即分析/点击【完成】、【取消】关闭底下抽屉
 			openSelect(){
 				this.$refs.popup.open()
 			},
 			closeSelect(){
 				this.$refs.popup.close()
+			},
+			openSharePopup(){
+				this.$refs.sharePopup.open()
+			},
+			closeSharePopup(){
+				this.$refs.sharePopup.close()
 			}
 		},
 		mounted() {
@@ -429,10 +489,75 @@
 		flex-direction: column;
 		align-items: center;
 		padding-top: 5px;
-		margin-bottom:60px ;
+		margin-bottom:90px ;
 		width: 100%;
 		height: auto;
 		background: #FFFFFF;
+	}
+	.comments{
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		height: fit-content;
+		margin-top: 10px;
+	}
+	.comments-left{
+		display: flex;
+		justify-content: center;
+		width: 20%;
+		height: 60px;
+	}
+	.avatar{
+		width: 40px;
+		height: 40px;
+		background: #4CD964;
+		border-radius: 50%;
+	}
+	.avatar-img{
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+	.comments-right{
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+		height: fit-content;
+	}
+	.right-top{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		height: 30px;
+	}
+	.user-name{
+		width: fit-content;
+		height: 100%;
+		font-size: 14px;
+		color: #606266;
+	}
+	.star{
+		display: flex;
+		flex-direction: row;
+		width:fit-content;
+		margin-right: 20px;
+		height: 100%;
+	}
+	.right-content{
+		width: 100%;
+		height: fit-content;
+		padding-right: 20px;
+		font-size: 16px;
+	}
+	.right-time{
+		width: 100%;
+		height: 20px;
+		margin-top: 10px;
+		display: flex;
+		justify-content: flex-end;
+		font-size: 12px;
+		color: #909399;
 	}
 	.parameters-child{
 		width: 90%;
@@ -522,5 +647,39 @@
 		font-size: 14px;
 		color: #FFFFFF;
 		background: #FA436A;
+	}
+	.share-popup{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		width: 100%;
+		height: 100px;
+		background: #FFFFFF;
+		border-radius: 5px 5px 0 0;
+		font-size: 14px;
+	}
+	.chare-child{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		width: 80px;
+		height: 80px;
+		margin-top: 5px;
+		color: #606266;
+	}
+	.img-child{
+		width: 40px;
+		height: 40px;
+	}
+	.chare-cancel{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 50px;
+		font-size: 14px;
+		background: #FFFFFF;
+		border-top: 1px #f3f3f3 solid;
 	}
 </style>

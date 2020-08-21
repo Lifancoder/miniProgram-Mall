@@ -20,7 +20,7 @@
 	export default{
 		data(){
 			return{
-				buttonImagesOne:[{img:'/static/testImages/testimage.jpg',
+				buttonImagesOne:[{img:'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucluj4j30m80m80y6.jpg',
 				describe:'江中猴姑米稀养胃早餐450g猴姑米稀15天袋装原味米糊冲饮麦片',current:'95.00',
 				price:'135.00',sales:'721',}]
 			}

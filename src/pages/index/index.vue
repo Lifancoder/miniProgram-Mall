@@ -197,51 +197,51 @@
 				indicatorColor: '#9D9D9D',
 				autoPlay: true,
 				interval: 5000,
-				images: ['../../static/testImages/sfewew.jpg',
-					'../../static/testImages/fdgssdf.jpg',
-					'../../static/testImages/sdfa.jpg'
+				images: ['http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucdglwj30ku0autar.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc1lisj30ku0augnv.jpg',
+					'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucar6gj306o05274i.jpg'
 				],
 
 				// 中部分类
 				buttonImagesOne: [{
-						img: '../../static/testImages/q.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc6de6j30eg07s75g.jpg',
 						title: '会员专享'
 					},
 					{
-						img: '../../static/testImages/w.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucnfmtj3046046746.jpg',
 						title: '有机专区'
 					},
 					{
-						img: '../../static/testImages/e.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc0ujmj30460463yd.jpg',
 						title: '厨房用具'
 					},
 					{
-						img: '../../static/testImages/r.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc6nijj3046046jra.jpg',
 						title: '生活电器'
 					},
 					{
-						img: '../../static/testImages/t.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucd4oej30460460sn.jpg',
 						title: '食品粮油'
 					}
 				],
 				buttonImageTwo: [{
-						img: '../../static/testImages/y.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucpn5nj3046046746.jpg',
 						title: '居家用品'
 					},
 					{
-						img: '../../static/testImages/u.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucidlaj3046046mx3.jpg',
 						title: '限时秒杀'
 					},
 					{
-						img: '../../static/testImages/i.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc09trj3046046a9z.jpg',
 						title: '一元抢购'
 					},
 					{
-						img: '../../static/testImages/o.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc4l7wj3046046745.jpg',
 						title: '9.9拼团'
 					},
 					{
-						img: '../../static/testImages/p.jpg',
+						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1uc6a0kj3046046dfq.jpg',
 						title: '积分兑换'
 					}
 				],
