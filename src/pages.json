@@ -50,6 +50,11 @@
 			"style":{
 			"navigationBarTitleText":"会员专享"	
 		}
+		},{
+		"path":"pages/socialCircle/shareThing",
+			"style":{
+			"navigationBarTitleText":"发布"	
+		}	
 		}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

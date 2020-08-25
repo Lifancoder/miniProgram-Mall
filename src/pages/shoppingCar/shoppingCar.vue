@@ -1,8 +1,20 @@
 <template>
-	<view class="content">
+	<view class="nologin" :style="{height:phoneHeight+'px'}" v-if="islogined==false">
+		<view class="nologin-content">
+			<view class="nologin-img">
+			<image class="car-img" src="../../static/images/nologin.jpg"></image>
+		</view>
+		<view class="nologin-text">
+			<text class="text-left">空空如也</text>
+			<navigator class="text-right" url="../mine/loginedMine" 
+			 open-type="switchTab">去登陆></navigator>
+		</view>
+		</view>
+	</view>
+	<view class="content" v-else>
 		<view class="Operation">
 			<view class="operation-child">
-				<view class="child-btn">
+				<view class="child-btn" @click="clearCar">
 					<text class="iconfont iconchenggong"></text>
 					<view class="btn-icon"><text class="icon-text">清空</text></view>
 				</view>
@@ -32,16 +44,29 @@
 						<view class="right-style">款式：{{list.name}}</view>
 						<view class="right-current">￥{{list.current}}</view>
 						<view class="right-num">
-							<view class="num-delete" @click="deleteNum(list.num,index)">
+							<view class="num-delete" @click="deleteNum(list.num,index,list.beforSelect)">
 								<view class="iconfont iconjianhao"></view>
 							</view>
 							<view class="number">{{list.num}}</view>
-							<view class="num-add" @click="addNum(list.num,index)">
+							<view class="num-add" @click="addNum(list.num,index,list.beforSelect)">
 								<view class="iconfont iconjiahao"></view>
 							</view>
 						</view>
 					</view>
-					<view class="right-delete"></view>
+					<view class="right-delete">
+						<view class="iconfont iconguanbi" @click="deleteItem(index)"></view>
+					</view>
+				</view>
+			</view>
+		</view>
+		
+		<!-- 提示框 -->
+		<view class="mask-alert" v-show="isAlert">
+			<view class="mask-button">
+				<view class="button-header">清空购物车？</view>
+				<view class="button-footer" >
+					<view class="footer-cancel" @click="closeAlert">取消</view>
+					<view class="footer-true" @click="clearCarFinish">确定</view>
 				</view>
 			</view>
 		</view>
@@ -52,8 +77,11 @@
 	export default{
 		data(){
 			return{
+				phoneHeight:0,
+				islogined:false,
 				price:'19.90',
 				settlement:0,
+				isAlert:false,
 				lists:[{
 					beforSelect:false,
 					select:true,
@@ -75,7 +103,7 @@
 		},
 		methods:{
 			// 减少商品数量
-			deleteNum(e,index){
+			deleteNum(e,index,select){
 				if(e>1){
 					for(let i=0;i<this.lists.length;i++){
 						if(i==index){
@@ -88,7 +116,7 @@
 				this.changeSettlement()
 			},
 			// 增加商品数量
-			addNum(e,index){
+			addNum(e,index,select){
 				if(e>=1){
 					for(let i=0;i<this.lists.length;i++){
 							if(i==index){
@@ -100,30 +128,36 @@
 			},
 			// 总价增减
 			changeSettlement(){
-				this.settlement=0
-				console.log(JSON.stringify(this.lists))
-				for(let i=0;i<this.lists.length;i++){
-					this.settlement +=this.lists[i].num*this.lists[i].current
+					this.settlement=0
+					let a=[]
+					let b=0
+					let c=0
+					for(let i=0;i<this.lists.length;i++){
+						if(this.lists[i].beforSelect==true){
+							a.push(this.lists[i])
+						}
+						c +=this.lists[i].num*this.lists[i].current
 				}
+				for(let j=0;j<a.length;j++){
+					b +=a[j].num*a[j].current
+				}
+				this.settlement=c-b
 			},
+			
 			//勾选商品
 			selectBefor(index){
-				let a=this.settlement
-				let b=0
 				for (let i=0;i<this.lists.length;i++) {
 					if(i==index){
 					this.lists[i].select=true
 				this.lists[i].beforSelect=false	
-				b=a+(this.lists[i].num*this.lists[i].current)
 					}
 				}
-				this.settlement=b
+				this.changeSettlement()
 			},
 			selected(index){
 				let a=this.settlement
 				let b=0
 				for (let i=0;i<this.lists.length;i++) {
-					console.log('已取消勾选' + a)
 					if(i==index){
 					this.lists[i].beforSelect=true
 					this.lists[i].select=false
@@ -131,15 +165,92 @@
 					}
 				}
 				this.settlement=b
+			},
+			//删除商品
+			deleteItem(index){
+				this.lists.splice(index,1)
+				this.changeSettlement()
+			},
+			// 清空购物车
+			clearCar(){
+				this.isAlert=true
+			},
+			closeAlert(){
+				this.isAlert=false
+			},
+			clearCarFinish(){
+				this.lists=[]
+				this.changeSettlement()
+				this.isAlert=false
+			},
+			
+			//未登录状态
+			isLogintype(){
+			var res=global.isLogin()
+			if(!res){
+				this.islogined=false
+			}else{
+				this.islogined=true
+			}	
 			}
 		},
 		mounted() {
+			this.isLogintype()
 			this.changeSettlement()
+			let a=0
+			uni.getSystemInfo({
+				success(e) {
+					a=e.windowHeight
+				}
+			})
+			this.phoneHeight=a
 		}
 	}
 </script>
 
 <style>
+	.nologin{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		/* background-color: #F5F5F5; */
+		z-index: 1;
+	}
+	.nologin-content{
+		width: fit-content;
+		height: fit-content;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.nologin-img{
+		width: 150px;
+		height: 100px;
+	}
+	.car-img{
+		width: 100%;
+		height: 100%;
+	}
+	.nologin-text{
+		width: 100%;
+		height: 30px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.text-left{
+		font-size: 14px;
+		color: #c0c4cc;
+		margin-right: 10px;
+	}
+	.text-right{
+		color: #FA436A;
+		font-size: 14px;
+	}
 	.content{
 			width: 100%;
 			height: 100%;
@@ -310,6 +421,7 @@
 			.right-delete{
 				width: 30px;
 				height: 100%;
+				margin-left: 5px;
 			}
 			.right-title{
 				width: 100%;
@@ -371,5 +483,72 @@
 			}
 			.iconfont.iconjiahao{
 				color: #555555
+			}
+			.iconfont.iconguanbi{
+				color: #606266;
+				font-size: 14px;
+			}
+			.mask-alert{
+				position: fixed;
+				top: 0;
+				left: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.6);
+				z-index: 15;
+			}
+			.mask-button{
+				width: 300px;
+				height: 100px;
+				border-radius: 5px;
+				background-color: #FFFFFF;
+			}
+			.button-header{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				height: 60%;
+				color: #999999;
+				border-bottom: 1px #F5F5F5 solid;
+			}
+			.button-footer{
+				display: flex;
+				flex-direction: row;
+				width: 100%;
+				height: 40%;
+			}
+			.footer-cancel{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 50%;
+				height: 99%;
+				border-radius: 0 0 0 5px;
+				color: #000000;
+				font-size: 16px;
+				font-weight: 500;
+				border-right: 0.5px #F5F5F5 solid;
+			}
+			.footer-cancel:active{
+				background-color: rgba(233, 230, 221);
+			}
+			.footer-true{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 50%;
+				height: 99%;
+				border-radius: 0 0 5px 0;
+				color: #007aff;
+				font-size: 16px;
+				font-weight: 500;
+				border-left: 0.5px #F5F5F5 solid;
+			}
+			.footer-true:active{
+				background-color: rgba(233, 230, 221);
 			}
 </style>

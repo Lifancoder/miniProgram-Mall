@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="head-title">社交圈</view>
-		<view class="share">
+		<view class="share" @click="toShareThing">
 			<image class="share-camera" src="../../static/images/camera.png"></image>
 			<text class="share-text">分享心得</text>
 		</view>
@@ -15,20 +15,21 @@
 				<view class="content-name">{{content.name}}</view>
 				<text class="content-text">{{content.content}}</text>
 				<view class="grids">
-					<view class="grids-item" v-for="image in content.images">
-						<image class="grid-image" :src="image"></image>
+					<view class="grids-item" v-for="(image,s) in content.images">
+						<image class="grid-image" @click="preview(content.images,s)" :src="image"></image>
 					</view>
 				</view>
 				<view class="content-footer">
 					<view class="footer-time">{{content.time}}</view>
 					<view class="footer-operation">
-						<image class="footer-share" @click="showDilog" src="../../static/images/share.png"></image>
-						<view class="operation-child" @click="showAlert">
-							<image class="footer-share" src="../../static/images/islike.png"></image>
+						<view class="iconfont iconshare_icon" @click="showDilog(index)"></view>
+						<view class="operation-child">
+							<view class="iconfont icondianzan" @click="unLike(index)" v-if="content.islike==true"></view>
+							<view class="iconfont icondianzan1"@click="showAlert(index)"  v-else></view>
 							<text class="operation-text">{{content.likenum}}</text>
 						</view>
-						<view class="operation-child" @click="toDetails">
-							<image class="footer-share" src="../../static/images/comment.png"></image>
+						<view class="operation-child" @click="toDetails(index)">
+							<view class="iconfont iconpinglun"></view>
 							<text class="operation-text">{{content.comments}}</text>
 						</view>
 					</view>
@@ -51,7 +52,7 @@
 				<view class="button-header">您尚未登录，前往登录？</view>
 				<view class="button-footer" >
 					<view class="footer-cancel" @click="closeAlert">取消</view>
-					<view class="footer-true">确定</view>
+					<view class="footer-true" @click="toLoginedMine">确定</view>
 				</view>
 			</view>
 		</view>
@@ -64,6 +65,7 @@
 		},
 		data(){
 			return{
+				islogining:false,
 				contentArray:[{avatar:'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg',
 				name:'大兵',content:'新年新气象，旧锅换新颜！翰乐公司以旧换新活动火爆进行中，'+
 				'只要你家有不用的坏锅都可以拿到翰乐公司换新锅，邮费报销，你还等待什么呢！趁着过年前赶紧换个高颜值，高品质的厨具吧！',
@@ -76,18 +78,43 @@
           'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg',
 		  'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg',
           'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'],
-		  time:'2020-08-12 15:14:16',likenum:2,comments:4}],
-		  isShare:false,
-		  isAlert:false
+		  time:'2020-08-12 15:14:16',likenum:2,comments:4, islike:false},
+		  {avatar:'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg',
+		  	name:'大兵',content:'新年新气象，旧锅换新颜！翰乐公司以旧换新活动火爆进行中，'+
+		  	'只要你家有不用的坏锅都可以拿到翰乐公司换新锅，邮费报销，你还等待什么呢！趁着过年前赶紧换个高颜值，高品质的厨具吧！',
+		  	images:['https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
+		  'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg'],
+		  time:'2020-08-12 15:14:16',likenum:34,comments:4, islike:false}],
+		 isShare:false,
+		 isAlert:false
 			}
 		},
 		methods:{
 			// 分享、点赞、评论操作
-			showDilog(){
+			showDilog(index){
 				this.isShare=true
 			},
-			showAlert(){
-				this.isAlert=true
+			showAlert(index){
+				let a=this.contentArray[index].likenum
+				if(this.islogining==false){
+					this.isAlert=true
+				}else{
+					this.contentArray[index].islike=true
+					this.contentArray[index].likenum=a+1
+				}
+			},
+			unLike(index){
+				let a=this.contentArray[index].likenum
+				this.contentArray[index].islike=false
+				this.contentArray[index].likenum=a-1
+				console.log('不喜欢')
 			},
 			closeDiog(){
 				this.isShare=false
@@ -95,14 +122,55 @@
 			closeAlert(){
 				this.isAlert=false
 			},
-			toDetails(){
-				uni.navigateTo({
-					url:'/pages/socialCircle/siciaCircleDetails',
+			toDetails(e){
+				console.log(e)
+				if(this.islogining==false){
+					this.isAlert=true
+				}else{
+					uni.navigateTo({
+					url:'/pages/socialCircle/siciaCircleDetails?index='+ e,
 				})
-			}
+				}
+			},
+			//跳转登录
+			toLoginedMine(){
+				uni.switchTab({
+					url:'/pages/mine/loginedMine',
+				})
+				this.closeAlert()
+			},
+			//跳转分享页面
+			toShareThing(){
+				if(this.islogining){
+				uni.navigateTo({
+					url:'/pages/socialCircle/shareThing'
+				})	
+				}else{
+					this.isAlert=true
+				}
+			},
+			// 预览图片
+			preview(images,s){
+				console.log(images)
+				console.log('索引：'+s)
+				uni.previewImage({
+					current:s,
+					urls:images,
+					success() {
+						
+					}
+				})
+			},
+			//判断是否登录
+			
 		},
 		mounted() {
-			
+			var res=global.isLogin()
+				if(!res){
+					this.islogining=false
+				}else{
+					this.islogining=true
+				}
 		}
 	}
 </script>
@@ -334,9 +402,22 @@
 	width: 120px;
 	height: 30px;
 }
-.footer-share{
-	width: 18px;
-	height: 18px;
+
+.iconfont.iconshare_icon{
+	font-size: 16px;
+	color: #36648b;
+}
+.iconfont.icondianzan1{
+	font-size: 18px;
+	color: #36648b;
+}
+.iconfont.icondianzan{
+	font-size: 16px;
+	color: #FA436A;
+}
+.iconfont.iconpinglun{
+	font-size: 16px;
+	color: #36648b;
 }
 .operation-child{
 	display: flex;

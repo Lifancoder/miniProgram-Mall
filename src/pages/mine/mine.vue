@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content-login">
 		<view class="home-button">
 			<uni-icons type="home" size="20" color="#FFFFFF"></uni-icons>
 		</view>
@@ -13,7 +13,7 @@
 				<text class="icon-text">手机号码</text>	
 				</view>
 				<input class="input-style" type="number" placeholder="请输入手机号" 
-					placeholder-style="font-size:12px" />
+				v-model="loginInfo.phoneNum"	placeholder-style="font-size:12px" />
 			</view>
 			<view class="phone">
 				<view class="icon-style">
@@ -21,7 +21,7 @@
 				<text class="icon-text">密码</text>	
 				</view>
 				<input class="input-style" password="true" type="text" placeholder="请输入密码" 
-					placeholder-style="font-size:12px" />
+				v-model="loginInfo.password"	placeholder-style="font-size:12px" />
 			</view>
 			<view class="forget">
 				<text class="forgetPwd">忘记密码</text>
@@ -43,12 +43,26 @@
 	export default{
 		components:{
 			uniIcons
+		},
+		data(){
+			return{
+				loginInfo:{
+					phoneNum:'',
+					password:''
+				}
+			}
+		},
+		methods:{
+			
+		},
+		mounted() {
+			
 		}
 	}
 </script>
 
 <style>
-.content {
+.content-login {
 		width: 100%;
 		height: 100%;
 		display: flex;

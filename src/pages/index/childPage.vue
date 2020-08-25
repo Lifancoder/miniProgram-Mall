@@ -510,7 +510,6 @@
 	.avatar{
 		width: 40px;
 		height: 40px;
-		background: #4CD964;
 		border-radius: 50%;
 	}
 	.avatar-img{
