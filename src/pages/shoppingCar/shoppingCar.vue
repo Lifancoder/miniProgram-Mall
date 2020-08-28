@@ -101,7 +101,9 @@
 				}]
 			}
 		},
-		
+		onShow() {
+			this.isLogintype()
+		},
 		methods:{
 			// 减少商品数量
 			deleteNum(e,index,select){
@@ -201,7 +203,7 @@
 			}
 		},
 		mounted() {
-			this.isLogintype()
+			
 			this.changeSettlement()
 			let a=0
 			uni.getSystemInfo({

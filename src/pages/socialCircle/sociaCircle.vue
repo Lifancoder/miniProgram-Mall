@@ -164,7 +164,7 @@
 			//判断是否登录
 			
 		},
-		mounted() {
+		onShow() {
 			try{
 				var phone=uni.getStorageSync('phone')
 				var pwd=uni.getStorageSync('pwd')
@@ -176,6 +176,9 @@
 			}else{
 				this.islogining=true
 			}
+			
+		},
+		mounted() {
 				
 		}
 	}

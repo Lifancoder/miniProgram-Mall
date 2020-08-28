@@ -1,6 +1,6 @@
 <template>
 	<view class="content-login" v-if="showLogin==false">
-		<view class="home-button">
+		<view class="home-button" @click="toIndex">
 			<uni-icons type="home" size="20" color="#FFFFFF"></uni-icons>
 		</view>
 		<view class="content-image">
@@ -44,9 +44,11 @@
 		</view>
 		<view class="input-select"  >
 				<uni-icons class="icon-styles" type="chat":color="textColor" size="20"></uni-icons>
-			<uni-icons class="icon-styles" type="gear" :color="textColor" size="22"></uni-icons>
+			<uni-icons class="icon-styles" type="gear" :color="textColor" size="22" @click="showGear(showgearview)"></uni-icons>
 		</view>
-		
+		<view class="show-gear" v-show="showgearview">
+			<text @click="colseGear">退出</text>
+		</view>
 		<view class="background-view">
 			<view class="avatar">
 				<image class="avatar-image" :src="avatarUrl"></image>
@@ -203,6 +205,7 @@
 		},
 		data(){
 			return{
+				showgearview:false,
 				showLogin:false,
 				scroll: 0,
 				textColor:'#FFFFFF',
@@ -223,12 +226,41 @@
 			}
 		},
 		methods:{
+			colseGear(){
+				this.showgearview=false
+				uni.removeStorageSync('phone'),
+				uni.removeStorageSync('pwd'),
+				uni.reLaunch({
+					url:'/pages/mine/loginedMine',
+					complete(e) {
+						console.log('重新进入')
+					}
+				})
+			},
+			showGear(e){
+				if(!e){
+					this.showgearview=true
+				}else{
+					this.showgearview=false
+				}
+				
+			},
+			toIndex(){
+				uni.switchTab({
+					url:'/pages/index/index',
+					complete(e) {
+						console.log('！！！'+JSON.stringify(e))
+					}
+				})
+			},
 			login(){
 				if(this.loginInfo.phoneNum.length!==11){
 					uni.showToast({
+						icon:'none',
 						title:'请输入正确的手机号',
 						position:'center'
 					})
+					return false;
 				}
 				try{
 					uni.setStorageSync('phone',this.loginInfo.phoneNum)
@@ -283,16 +315,20 @@
 						url:'/pages/mine/myAmount/integral?info='+encodeURIComponent(JSON.stringify(val))
 					})
 				}
+			
 		},
-		mounted() {
+		onShow() {
 			var res=global.isLogin()
 			console.log('测试：'+ res)
 			if(!res){
 				this.showLogin=false
 			}else{
+				console.log('重新进入')
 				this.showLogin=true
 			}
 			
+		},
+		mounted() {
 		},
 		//实时监听滚动条距TOP距离
 		onPageScroll(res){
@@ -320,6 +356,14 @@
 		background-color: #F5F5F5;
 		overflow: scroll;
 		z-index: 1;
+	}
+	.show-gear{
+		position: absolute;
+		top: 45px;
+		right: 0;
+		width: 100px;
+		height: 60px;
+		background: #FFFFFF;
 	}
 .input-select{
 	position: fixed;
