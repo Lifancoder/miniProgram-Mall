@@ -12,7 +12,7 @@
 				<uni-icons type="phone" color="#909399" size="16"></uni-icons>
 				<text class="icon-text">手机号码</text>	
 				</view>
-				<input class="input-style" type="number" placeholder="请输入手机号" 
+				<input class="input-style" type="number" maxlength=11 placeholder="请输入手机号" 
 				v-model="loginInfo.phoneNum"	placeholder-style="font-size:12px" />
 			</view>
 			<view class="phone">
@@ -43,8 +43,8 @@
 			<text style="color: #000000;">我的</text>
 		</view>
 		<view class="input-select"  >
-				<uni-icons class="icon-style" type="chat":color="textColor" size="20"></uni-icons>
-			<uni-icons class="icon-style" type="gear" :color="textColor" size="22"></uni-icons>
+				<uni-icons class="icon-styles" type="chat":color="textColor" size="20"></uni-icons>
+			<uni-icons class="icon-styles" type="gear" :color="textColor" size="22"></uni-icons>
 		</view>
 		
 		<view class="background-view">
@@ -61,7 +61,7 @@
 			
 			<!-- 我的资产 -->
 		<view class="assets">
-			<view class="mine-assets">
+			<view class="mine-assets" @click="toMore">
 				<text class="assets-title">我的资产</text>
 				<view class="assets-more">
 					<text class="more-text">更多</text>
@@ -69,19 +69,19 @@
 				</view>
 			</view>
 			<view class="assets-amount">
-				<view class="amount-child" >
+				<view class="amount-child" @click="toBalance(mineAmount.balance)">
 					<text class="amount">{{mineAmount.balance}}</text>
 					<text class="amount-text">余额</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toIncome(mineAmount.income)">
 					<text class="amount">{{mineAmount.income}}</text>
 					<text class="amount-text">收益</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toCoupons(mineAmount.coupons)">
 					<text class="amount">{{mineAmount.coupons}}</text>
 					<text class="amount-text">优惠券</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toIntegral(mineAmount.integral)">
 					<text class="amount">{{mineAmount.integral}}</text>
 					<text class="amount-text">积分</text>
 				</view>
@@ -224,6 +224,12 @@
 		},
 		methods:{
 			login(){
+				if(this.loginInfo.phoneNum.length!==11){
+					uni.showToast({
+						title:'请输入正确的手机号',
+						position:'center'
+					})
+				}
 				try{
 					uni.setStorageSync('phone',this.loginInfo.phoneNum)
 					uni.setStorageSync('pwd',this.loginInfo.password)
@@ -232,6 +238,50 @@
 					
 				}
 					
+					/* this.http({
+						url:'https://lifan.cool:8004/center/ucenter/login',
+						method:'POST',
+						data:{
+							mobile:this.loginInfo.phoneNum,
+							password:this.loginInfo.password
+						},
+						
+						success:(res) =>{
+							
+							console.log('请求成功：'+res)
+						},
+						complete:(e) =>{
+							
+						},
+						
+					}) */
+				},
+				
+				//跳转相关子页面
+				toMore(){
+						uni.navigateTo({
+						url:'/pages/mine/myAmount/more?info='+encodeURIComponent(JSON.stringify(this.mineAmount)),
+					})	
+				},	
+				toBalance(val){
+					uni.navigateTo({
+					url:'/pages/mine/myAmount/balance?info='+encodeURIComponent(JSON.stringify(val)),
+				})	
+				},
+				toIncome(val){
+					uni.navigateTo({
+						url:'/pages/mine/myAmount/income?info='+encodeURIComponent(JSON.stringify(val))
+					})
+				},
+				toCoupons(val){
+					uni.navigateTo({
+						url:'/pages/mine/myAmount/coupons?info='+encodeURIComponent(JSON.stringify(val))
+					})
+				},
+				toIntegral(val){
+					uni.navigateTo({
+						url:'/pages/mine/myAmount/integral?info='+encodeURIComponent(JSON.stringify(val))
+					})
 				}
 		},
 		mounted() {
@@ -298,8 +348,10 @@
 	background-color: #FFFFFF;
 	opacity: 2;
 }
-.icon-style{
-	margin-right: 15px;
+.icon-styles{
+	width: 30px;
+	height: 30px;
+	
 }
 .background-view{
 	display: flex;

@@ -101,6 +101,7 @@
 				}]
 			}
 		},
+		
 		methods:{
 			// 减少商品数量
 			deleteNum(e,index,select){
@@ -186,12 +187,17 @@
 			
 			//未登录状态
 			isLogintype(){
-			var res=global.isLogin()
-			if(!res){
+			try{
+				var phone=uni.getStorageSync('phone')
+				var pwd=uni.getStorageSync('pwd')
+				
+			}catch(e){
+			}
+			if(phone == ''||pwd == ''){
 				this.islogined=false
 			}else{
 				this.islogined=true
-			}	
+			}
 			}
 		},
 		mounted() {

@@ -2,15 +2,15 @@
 	<view class="content">
 		<view class="Operation">
 			<view class="operation-child">
-				<navigator class="index-page">
+				<navigator class="index-page" hover-class='none'>
 					<image class="navigator-img" src="../../static/images/tab-home.png"></image>
 					<text class="navigator-text">首页</text>
 				</navigator>
-				<navigator class="index-page" >
+				<navigator class="index-page" hover-class='none'>
 					<image class="navigator-img" src="../../static/images/tab-cart.png"></image>
 					<text class="navigator-text">购物车</text>
 				</navigator>
-				<navigator class="index-page">
+				<navigator class="index-page"hover-class='none'>
 					<uni-icons type="star-filled" color="#909399" size="20"></uni-icons>
 					<text class="navigator-text">收藏</text>
 				</navigator>
@@ -306,6 +306,9 @@
 		align-items: center;
 		width: 50px;
 		height: 50px;
+	}
+	.index-page:active{
+		background-color: #f3f3f3;
 	}
 	.swiper-image {
 		width: 100%;

@@ -1,9 +1,9 @@
 <script>
 	export default {
 		onLaunch: function() {
-			// uni.removeStorageSync('phone')
-			// uni.removeStorageSync('pwd')
-			console.log('App Launch')
+		/* 	uni.removeStorageSync('phone')
+			uni.removeStorageSync('pwd')
+			console.log('App Launch') */
 			//验证是否登录
 			global.isLogin=function(){
 				try{

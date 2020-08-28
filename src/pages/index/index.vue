@@ -24,18 +24,18 @@
 			<text>七天无理由退换</text>
 		</view>
 		<view class="classification">
-			<view class="classification-one">
-				<view class="classification-child" @click="toMember" v-for=" (images,index) in buttonImagesOne" :key="index">
+			<!-- <view class="classification-one"> -->
+				<view class="classification-child" @click="toMember(images.title)" v-for=" (images,index) in buttonImagesOne" :key="index">
 					<image :src="images.img" class="classification-image"></image>
 					<text class="classification-text">{{images.title}}</text>
 				</view>
-			</view>
-			<view class="classification-one">
+			<!-- </view> -->
+			<!-- <view class="classification-one">
 				<view class="classification-child" v-for="(images,index) in buttonImageTwo" :key="index">
 					<image :src="images.img" class="classification-image"></image>
 					<text class="classification-text">{{images.title}}</text>
 				</view>
-			</view>
+			</view> -->
 		</view>
 		<view class="timer">
 			<view style="display: flex;flex-direction: row;align-items: center;">
@@ -58,7 +58,7 @@
 			</view>
 			<view class="commodity">
 				<view v-for=" (i,index) in buttonImagesOne" class="commodity-child" @click="toDetails" :key="index">
-					<image class="commodity-img" :src="i.img"></image>
+					<image class="commodity-img"  :src="i.img"></image>
 					<text class="commodity-text">江中猴菇米稀养胃早餐450g不好吃手动阀</text>
 					<view class="commodity-label">
 						<text style="font-size: 12px;">分享估赚￥3</text>
@@ -191,6 +191,7 @@
 
 		data() {
 			return {
+				//
 				//轮播图//
 				indicatorDots: true,
 				indicatorActiveColor: '#FF2D2D',
@@ -222,9 +223,7 @@
 					{
 						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucd4oej30460460sn.jpg',
 						title: '食品粮油'
-					}
-				],
-				buttonImageTwo: [{
+					},{
 						img: 'http://ww1.sinaimg.cn/large/006AcIg8gy1ghx1ucpn5nj3046046746.jpg',
 						title: '居家用品'
 					},
@@ -260,7 +259,6 @@
 				dialogCode: false
 			}
 		},
-		onLoad() {},
 		methods: {
 
 			//计时器赋值（后期需要设置倒计时离开页面停止，进入时恢复）
@@ -298,10 +296,59 @@
 				})
 			},
 			//点击会员专享
-			toMember(){
-				uni.navigateTo({
-					url:'fastWay/member'
+			toMember(val){
+				if(val=='会员专享'){
+					uni.navigateTo({
+					url:'fastWay/member',
 				})
+				return true;
+				}else if(val =='有机专区'){
+					uni.navigateTo({
+						url:'fastWay/organic'
+					})
+					return true;
+				}else if(val =='厨房用具'){
+					uni.navigateTo({
+						url:'fastWay/kitchen'
+					})
+					return true;
+				}else if(val =='生活电器'){
+					uni.navigateTo({
+						url:'fastWay/appliances'
+					})
+					return true;
+				}else if(val =='食品粮油'){
+					uni.navigateTo({
+						url:'fastWay/grain'
+					})
+					return true;
+				}else if(val =='居家用品'){
+					uni.navigateTo({
+						url:'fastWay/homeSupplies'
+					})
+					return true;
+				}else if(val =='限时秒杀'){
+					uni.navigateTo({
+						url:'fastWay/snapped'
+					})
+					return true;
+				}else if(val =='一元抢购'){
+					uni.navigateTo({
+						url:'fastWay/secondKill'
+					})
+					return true;
+				}else if(val =='9.9拼团'){
+					uni.navigateTo({
+						url:'fastWay/collage'
+					})
+					return true;
+				}else if(val =='积分兑换'){
+					uni.navigateTo({
+						url:'fastWay/integral'
+					})
+					return true;
+				}
+				
 			}
 		},
 		mounted() {
@@ -483,7 +530,8 @@
 		width: 100%;
 		height: 160px;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		background-color: #FFFFFF;
 	}
 
