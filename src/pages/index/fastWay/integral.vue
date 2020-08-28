@@ -15,7 +15,7 @@
 				<text style="color: #909399;font-size: 12px;" >￥{{i.price}}</text>
 			</view>
 			<view style="display: flex;justify-content: space-between;align-items: center;width: 100%;">
-				<text style="color: #909399;font-size: 12px;" v-if="i.sold!==0">已兑换 {{i.coupons}}件</text>
+				<text style="color: #909399;font-size: 12px;" v-if="i.coupons!==0">已兑换 {{i.coupons}}件</text>
 				<text v-else></text>
 				<button class="shopping-button">立即兑换</button>
 			</view>

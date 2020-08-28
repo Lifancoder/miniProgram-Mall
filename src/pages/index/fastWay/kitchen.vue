@@ -21,7 +21,7 @@
 				<text style="color: #909399;font-size: 12px;" >已售{{i.sold}}件</text>
 			</view>
 			<view style="display: flex;justify-content: space-between;align-items: center;width: 100%;">
-				<text style="color: #909399;font-size: 12px;" v-if="i.sold!==0">优惠券 ￥{{i.coupons}}</text>
+				<text style="color: #909399;font-size: 12px;" v-if="i.coupons!==0">优惠券 ￥{{i.coupons}}</text>
 				<text v-else></text>
 				<button class="shopping-button">立即抢购</button>
 			</view>
