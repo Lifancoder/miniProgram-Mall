@@ -1,5 +1,5 @@
 module.exports=(params)=>{
-	let url=params.url
+	let url='http://172.20.10.2:9090'+params.url
 	let method =params.method
 	let header=params.header ||{}
 	let data =params.data ||{}

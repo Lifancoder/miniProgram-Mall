@@ -120,6 +120,11 @@
 			"style":{
 			"navigationBarTitleText":"积分兑换"	
 		}	
+		},{
+		"path":"pages/mine/myOrder/order",
+			"style":{
+			"navigationBarTitleText":"我的订单"	
+		}	
 		}],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

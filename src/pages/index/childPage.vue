@@ -227,6 +227,16 @@
 			}
 		},
 		methods:{
+			//获取所有订单
+			/* getMallOrderList(){
+				this.http({
+					url:''
+				})
+					
+				
+			} */
+			
+			
 			//分段器选择（详情/参数/评价）
 			slectControl(e){
 				console.log('打印：'+ JSON.stringify(e) )
@@ -255,6 +265,7 @@
 					console.log('手机信息：'+this.getHeight)
 				}
 			})
+			
 		}
 	}
 </script>

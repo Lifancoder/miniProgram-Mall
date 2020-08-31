@@ -78,6 +78,6 @@
         "router" : {
             "mode" : "history"
         }
-	
+
     }
 }

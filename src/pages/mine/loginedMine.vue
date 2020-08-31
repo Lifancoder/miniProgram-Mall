@@ -92,7 +92,7 @@
 		
 		<!-- 我的订单 -->
 		<view class="assets">
-			<view class="mine-assets">
+			<view class="mine-assets" @click="toMyOrder(0)">
 				<text class="assets-title">我的订单</text>
 				<view class="assets-more">
 					<text class="more-text">全部订单</text>
@@ -100,21 +100,21 @@
 				</view>
 			</view>
 			<view class="assets-amount">
-				<view class="amount-child" >
+				<view class="amount-child" @click="toMyOrder(1)">
 					<text class="iconfont icondaifukuan"></text>
-					<text class="order">待付款</text>
+					<text class="order" >待付款</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toMyOrder(3)">
 					<text class="iconfont icondaishouhuo"></text>
-					<text class="order">待收货</text>
+					<text class="order" >待收货</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toMyOrder(4)">
 					<text class="iconfont iconchenggong"></text>
-					<text class="order">待评价</text>
+					<text class="order" >待评价</text>
 				</view>
-				<view class="amount-child" >
+				<view class="amount-child" @click="toMyOrder(5)">
 					<text class="iconfont icontuikuanshouhou"></text>
-					<text class="order">退款/售后</text>
+					<text class="order" >退款/售后</text>
 				</view>
 			</view>
 		</view>
@@ -261,35 +261,47 @@
 						position:'center'
 					})
 					return false;
-				}
-				try{
-					uni.setStorageSync('phone',this.loginInfo.phoneNum)
-					uni.setStorageSync('pwd',this.loginInfo.password)
-					this.showLogin=true
-				} catch(e){
-					
-				}
-					
-					/* this.http({
-						url:'https://lifan.cool:8004/center/ucenter/login',
-						method:'POST',
-						data:{
-							mobile:this.loginInfo.phoneNum,
-							password:this.loginInfo.password
-						},
-						
-						success:(res) =>{
+				}else{
+						this.http({
+							url:'/xiaochengxu',
+							method:'POST',
+							data:{
+								username:this.loginInfo.phoneNum,
+								password:this.loginInfo.password
+							},
 							
-							console.log('请求成功：'+res)
-						},
-						complete:(e) =>{
+							success:(res) =>{
+								console.log('请求成功：'+res)
+								if(res.code==0){
+									try{
+									uni.setStorageSync('phone',this.loginInfo.phoneNum)
+									uni.setStorageSync('pwd',this.loginInfo.password)
+									this.showLogin=true
+								} catch(e){
+								}
+								}else{
+									uni.showToast({
+										icon:"none",
+										title:'账号密码错误',
+										duration:2000,
+										position:'center'
+									})
+									return false
+								}
+								
+							},
+							complete:(e) =>{
+								console.log('请求返回：'+e)
+							},
 							
-						},
+						}) 
 						
-					}) */
+						
+				
+				}
 				},
 				
-				//跳转相关子页面
+				//跳转相关子页面(我的资产)
 				toMore(){
 						uni.navigateTo({
 						url:'/pages/mine/myAmount/more?info='+encodeURIComponent(JSON.stringify(this.mineAmount)),
@@ -314,8 +326,13 @@
 					uni.navigateTo({
 						url:'/pages/mine/myAmount/integral?info='+encodeURIComponent(JSON.stringify(val))
 					})
+				},
+				//跳转相关子页面(我的订单)
+				toMyOrder(e){
+					uni.navigateTo({
+						url:'/pages/mine/myOrder/order?index='+e
+					})
 				}
-			
 		},
 		onShow() {
 			var res=global.isLogin()
